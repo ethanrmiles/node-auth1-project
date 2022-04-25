@@ -44,6 +44,20 @@ router.post('/login', async(req,res,next) => {
   }
 })
 
+router.get('/logout', (req,res,next) => {
+  if(req.session.user){
+    req.session.destroy(err => {
+      if (err != null){
+        next(err)
+        return
+      }
+      res.status(200).json({ message: 'You are now logeed out!'})
+    })
+  } else {
+    res.status(200).json({ message: 'You were already logged out'})
+  }
+})
+
 
 /**
   1 [POST] /api/auth/register { "username": "sue", "password": "1234" }
