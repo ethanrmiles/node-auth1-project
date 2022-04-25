@@ -5,6 +5,7 @@ const session = require('express-session')
 
 const sessionConfig = {
   secret: 'hlkajshdfJLKHFfs',
+  name: 'chocolatechip',
   cookie: {
     maxAge: 1000 * 60 * 5,
     secure: false,
