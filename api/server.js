@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const session = require('express-session')
 const userRouter = require('./users/users-router')
+const authRouter = require('./auth/auth-router')
 
 const sessionConfig = {
   secret: 'hlkajshdfJLKHFfs',
@@ -28,6 +29,7 @@ server.get("/", (req, res) => {
 });
 
 server.use('/api/users', userRouter)
+server.use('/api/auth', authRouter)
 
 server.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
