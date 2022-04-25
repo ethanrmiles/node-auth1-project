@@ -19,6 +19,22 @@ router.post('/register', async(req,res,next) => {
   }
 })
 
+router.post('/login', async(req,res,next) => {
+  try{
+    const { username, password } = req.body
+
+    const user = await model.findBy({ username }).first()
+    if (user === null){
+      res.status(401).json('Invalid credentials')
+      return
+    }else {
+      res.status(200).json('wElComE')
+    }
+  }catch(err){
+    next(err)
+  }
+})
+
 
 /**
   1 [POST] /api/auth/register { "username": "sue", "password": "1234" }
