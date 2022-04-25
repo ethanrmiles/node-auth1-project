@@ -2,6 +2,7 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
 const session = require('express-session')
+const userRouter = require('./users/users-router')
 
 const sessionConfig = {
   secret: 'hlkajshdfJLKHFfs',
@@ -25,6 +26,8 @@ server.use(session(sessionConfig))
 server.get("/", (req, res) => {
   res.json({ api: "up" });
 });
+
+server.use('/api/users', userRouter)
 
 server.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
