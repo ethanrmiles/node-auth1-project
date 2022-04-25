@@ -1,6 +1,19 @@
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
+const session = require('express-session')
+
+const sessionConfig = {
+  secret: 'hlkajshdfJLKHFfs',
+  cookie: {
+    maxAge: 1000 * 60 * 5,
+    secure: false,
+    httpOnly: true
+  },
+  resave: false,
+  saveUninitialized: false,
+}
+
 
 /**
   Do what needs to be done to support sessions with the `express-session` package!
@@ -20,6 +33,7 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
+server.use(session(sessionConfig))
 
 server.get("/", (req, res) => {
   res.json({ api: "up" });
